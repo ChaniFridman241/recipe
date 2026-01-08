@@ -1,0 +1,101 @@
+
+
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Recipe Hub - Premium</title>
+    <link rel="stylesheet" href="c.css">
+</head>
+<body class="dark-mode">
+
+    <section id="login-page" class="page active">
+        <div class="glass-card auth-container">
+            <h1 class="neon-text">אתר מתכונים</h1>
+            <p class="p" style="text-align: center;">התחברי לעולם של טעמים</p>
+            <input type="text" id="username" placeholder="שם משתמש" class="input-ai">
+            <input type="password" id="password" placeholder="סיסמה" class="input-ai">
+            <div id="auth-actions" class="login-buttons" style="display: flex; flex-direction: column; gap: 10px;">
+                <button id="login-btn" onclick="login()" class="btn-glow" style="width: 100%;">התחברות</button>
+                <button id="register-btn" onclick="register()" class="btn-outline" style="display: none; width: 100%; border-color: var(--accent); color: var(--accent);">
+                    משתמש לא קיים - לחצי כאן להרשמה וכניסה מהירה
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="main-page" class="page">
+        <header class="main-header">
+            <button onclick="showSettings()" class="btn-settings-round" title="הגדרות">
+                <span>⚙️</span>
+            </button>
+            <h2 class="neon-text">מתכונים</h2>
+            <button onclick="showAddRecipe()" class="btn-add-modern" title="הוספת מתכון">
+                <span>+ הוספת מתכון חדש</span>
+            </button>
+        </header>
+        
+        <div class="search-bar-container">
+            <input type="text" id="search-input" placeholder="חפשי מתכון..." oninput="filterRecipes()" class="input-ai">
+        </div>
+
+        <div id="recipe-list" class="grid-container"></div>
+    </section>
+
+    <div id="add-recipe-modal" class="modal">
+        <div class="glass-card modal-content">
+            <h2 class="neon-text">הוספת מתכון חדש</h2>
+            <input type="text" id="new-recipe-title" placeholder="שם המתכון" class="input-ai">
+            <textarea id="new-recipe-ingredients" placeholder="רכיבים (הפרידי בפסיקים...)" class="input-ai" rows="3"></textarea>
+            <textarea id="new-recipe-steps" placeholder="הוראות הכנה..." class="input-ai" rows="5"></textarea>
+            <div class="login-buttons">
+                <button onclick="saveNewRecipe()" class="btn-glow">שמור מתכון</button>
+                <button onclick="hideAddRecipe()" class="btn-outline">ביטול</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal">
+        <div class="glass-card modal-content">
+            <h2 class="neon-text">הגדרות מערכת</h2>
+            <div class="section-box" style="margin: 20px 0; text-align: center;">
+                <label style="display: block; margin-bottom: 10px;">מהירות הקראת המתכון:</label>
+                <input type="range" id="speech-rate" min="0.5" max="1.8" step="0.1" value="1" style="width: 100%;">
+            </div>
+            <div class="section-box" style="margin-bottom: 20px;">
+                <button onclick="toggleTheme()" class="btn-outline" style="width: 100%;">החלף למצב בהיר / כהה</button>
+            </div>
+            <div class="login-buttons">
+                <button onclick="hideSettings()" class="btn-glow">סגור ושמור</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="recipe-detail-page" class="page">
+        <div class="glass-card recipe-container">
+            <button onclick="navigateTo('main-page')" class="back-btn">→ חזרה לרשימה</button>
+            <h2 id="detail-title" class="neon-text"></h2>
+            <div class="recipe-content">
+                <div class="section-box">
+                    <h3>📋 מצרכים</h3>
+                    <ul id="detail-ingredients"></ul>
+                </div>
+                <div class="section-box">
+                    <h3>👨‍🍳 אופן ההכנה</h3>
+                    <p id="detail-steps"></p>
+                </div>
+            </div>
+            <div class="audio-controls">
+                <button onclick="startSpeaking()" class="audio-btn">▶ השמע הכל</button>
+                <button onclick="pauseSpeaking()" class="audio-btn">⏸ עצירה</button>
+                <button onclick="resumeSpeaking()" class="audio-btn">⏯ המשך</button>
+                <button onclick="stopSpeaking()" class="audio-btn">⏹ ביטול</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="c.js"></script>
+</body>
+</html>
